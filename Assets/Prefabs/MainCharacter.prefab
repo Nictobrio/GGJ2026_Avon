@@ -132,7 +132,6 @@ MonoBehaviour:
   Camera: {fileID: 4549269471316049599}
   speed: 5
   mouseSensitivity: 500
-  xrotation: 0
 --- !u!143 &2205854354841255707
 CharacterController:
   m_ObjectHideFlags: 0
