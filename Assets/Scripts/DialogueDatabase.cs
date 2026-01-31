@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "DialogueDatabase", menuName = "GGJ/Database/Dialogue/New Database")]
+[CreateAssetMenu(fileName = "DialogueDatabase", menuName = "GGJ/Database/Dialogue")]
 public class DialogueDatabase : ScriptableObject, ISerializationCallbackReceiver
 {
     [SerializeField] private List<Dialogue> dialogues;

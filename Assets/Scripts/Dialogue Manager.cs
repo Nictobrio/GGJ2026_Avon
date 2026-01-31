@@ -12,6 +12,7 @@ public class DialogueManager : MonoBehaviour
 
     [SerializeField] private GameObject dialogueBox;
     [SerializeField] private GameObject nextDialogue;
+    [SerializeField] private GameObject optionPanel;
     private float typingTime = 0.03f;
 
     private Queue<string> dialogues;
@@ -25,6 +26,7 @@ public class DialogueManager : MonoBehaviour
     private float openBoxClipDuration, closeBoxClipDuration;
 
     public GameObject NextDialogue { get => nextDialogue; set => nextDialogue = value; }
+    public GameObject OptionPanel { get => optionPanel; set => optionPanel = value; }
     internal DialogueStates DialogueState { get => dialogueState; set => dialogueState = value; }
     public bool AutoTextComplete { get => autoTextComplete; set => autoTextComplete = value; }
 
@@ -86,46 +88,6 @@ public class DialogueManager : MonoBehaviour
         StopAllCoroutines();
         StartCoroutine(TypeText(false, dialogues.Dequeue(), () => { if (nextDialogue != null) nextDialogue.SetActive(true); }));
 
-    }
-
-    public async void AutoText(Dialogue dialogue = null)
-    {
-        if (AutoTextComplete) AutoTextComplete = false;
-
-        if (dialogueState == DialogueStates.StandBy)
-        {
-            dialogues.Clear();
-            if (!dialogueState.Equals(DialogueStates.Init)) DialogueState = DialogueStates.Init;
-
-            foreach (var item in dialogue.Lines)
-            {
-                dialogues.Enqueue(item);
-            }
-
-            if (!dialogueBox.activeSelf)
-            {
-                dialogueBox.SetActive(true);
-                await new UnityAsync.WaitForSeconds(openBoxClipDuration);
-            }
-        }
-        else
-        {
-            if (dialogues.Count == 0)
-            {
-                StopAllCoroutines();
-                if (!DialogueState.Equals(DialogueStates.End)) DialogueState = DialogueStates.End;
-                dialogueBox.GetComponentInChildren<Text>().text = string.Empty;
-                DialogueBoxAnimator.SetTrigger(GameConstants.CLOSE_BOX);
-                await new UnityAsync.WaitForSeconds(closeBoxClipDuration + 1f);
-                if (dialogueBox.activeSelf) dialogueBox.SetActive(false);
-                AutoTextComplete = true;
-                if (!DialogueState.Equals(DialogueStates.StandBy)) DialogueState = DialogueStates.StandBy;
-                return;
-            }
-        }
-
-        StopAllCoroutines();
-        _ = StartCoroutine(TypeText(true, dialogues.Dequeue(), () => { AutoText(); }));
     }
 
     private IEnumerator TypeText(bool isSequence, string line, Action Done)
