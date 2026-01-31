@@ -12,7 +12,7 @@ public class CharacterMovement : MonoBehaviour
 
     //camera
     public float mouseSensitivity = 100f;
-    public float xrotation = 0f;
+    float xrotation = 0f;
 
     void Start()
     {
@@ -35,8 +35,8 @@ public class CharacterMovement : MonoBehaviour
 
 
         //Camera
-        float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * mouseSensitivity;
-        float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * mouseSensitivity;
+        float mouseX = Input.GetAxisRaw("Mouse X") * mouseSensitivity * Time.deltaTime;
+        float mouseY = Input.GetAxisRaw("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
 
         transform.Rotate(Vector3.up * mouseX);
