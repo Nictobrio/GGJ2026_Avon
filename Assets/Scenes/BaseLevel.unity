@@ -259,6 +259,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: b67c0a8d6c480b344b529a6ed32d112d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2d8cef190d4474841937ef922da1acc5, type: 2}
     - target: {fileID: 919132149155446097, guid: b67c0a8d6c480b344b529a6ed32d112d, type: 3}
       propertyPath: m_Name
       value: Roof
@@ -420,6 +424,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 4eb3e111b9119eb4ab1b75dc37e84722, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2d8cef190d4474841937ef922da1acc5, type: 2}
     - target: {fileID: 919132149155446097, guid: 4eb3e111b9119eb4ab1b75dc37e84722, type: 3}
       propertyPath: m_Name
       value: Walls

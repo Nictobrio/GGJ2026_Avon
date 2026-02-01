@@ -45,7 +45,7 @@ public class CharacterMovement : MonoBehaviour
         
         Camera.transform.localRotation = Quaternion.Euler(xrotation, 0f, 0f);
 
-        Debug.Log($"Mouse X: {mouseX} | Mouse Y: {mouseY}");
+        //Debug.Log($"Mouse X: {mouseX} | Mouse Y: {mouseY}");
     }
 
 

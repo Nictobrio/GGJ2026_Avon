@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour {
     [SerializeField] private Image _currentMaskImage;
     [SerializeField] private ChangeMaskButton[] _changeMaskButtons;
+    [SerializeField] private GameObject _settingsMenu;
 
     #region Singleton
     public static UIManager Instance { get; private set; }
@@ -13,11 +14,11 @@ public class UIManager : MonoBehaviour {
             Destroy(gameObject); //If there is already an instance of the PersistentSingleton, destroys the new one on Awake
         } else {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
     }
     #endregion
 
+    #region Masks
     public void ChangeMask(ChangeMaskButton changeMaskButton) {
         changeMaskButton.HideButton();
         for (int i = 0; i < _changeMaskButtons.Length; i++) {
@@ -50,6 +51,15 @@ public class UIManager : MonoBehaviour {
         //If the code reaches this part, it means there are no masks remaining
         //Game Over
         Debug.Log("Game Over");
+    }
+    #endregion
+
+    public void OpenSettingsMenu() {    //Called from a button
+        _settingsMenu.SetActive(true);
+    }
+
+    public void CloseSettingsMenu() {    //Called from a button
+        _settingsMenu.SetActive(false);
     }
 
 }
