@@ -22,7 +22,6 @@ public class Dialogue
         public bool TriggerEvent { get => triggerEvent; set => triggerEvent = value; }
         public string TextLine { get => textLine; set => textLine = value; }
     }
-
 }
 
 [System.Serializable]
