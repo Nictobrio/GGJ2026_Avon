@@ -1,17 +1,27 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using System.Linq;
 using UnityAsync;
 using System;
 using System.Collections;
 using System.Runtime.CompilerServices;
+using UnityEngine.InputSystem.Controls;
 
 public class DialogueSystem : MonoBehaviour, ISerializationCallbackReceiver
 {
-    private bool isInRange, didDialogueStart, fullText, trigger, isAnswer;
+    private bool isInRange, didDialogueStart, fullText, trigger, isAnswer, enter, exit;
 
     public bool optionSelected;
+
+    private string npcName;
+
+    [SerializeField] Dictionary<string, GameObject> npcs;
+
+    [SerializeField] List<GameObject> npcList;
+
+    public Dictionary<string, GameObject> NPCS { get => npcs; set => npcs = value; }
 
     [SerializeField] private Dialogue dialogues;
 
@@ -19,12 +29,11 @@ public class DialogueSystem : MonoBehaviour, ISerializationCallbackReceiver
 
     private Queue<string> textLines;
 
-    [SerializeField] private List<Answer> answers;
-
     [SerializeField] private TMP_Text dialogueText;
     [SerializeField] private GameObject dialogueBox;
     [SerializeField] private GameObject nextDialogue;
     [SerializeField] private GameObject optionPanel;
+    [SerializeField] private GameObject buttons;
 
 
     private Animator DialogueBoxAnimator;
@@ -32,7 +41,7 @@ public class DialogueSystem : MonoBehaviour, ISerializationCallbackReceiver
 
     private float openBoxClipDuration, closeBoxClipDuration;
 
-    [SerializeField] Dictionary<AnswerType, List<string>> Answers;
+    Dictionary<AnswerType, List<string>> Answers;
 
     //Nehuen
 
@@ -60,12 +69,7 @@ public class DialogueSystem : MonoBehaviour, ISerializationCallbackReceiver
     // Update is called once per frame
     void Update()
     {
-        float fire1 = Input.GetAxis("Fire1");
-
-        Debug.Log(fire1);
-        Debug.Log(isInRange);
-
-        if ( isInRange && fire1 > 0 && !isAnswer)// Agregar is in range 
+        if (isInRange && Input.GetKeyDown(KeyCode.Space) && !isAnswer)
         {
             if (!didDialogueStart)
             {
@@ -86,7 +90,7 @@ public class DialogueSystem : MonoBehaviour, ISerializationCallbackReceiver
             StartAnswer();
         }
 
-        if (isAnswer && fire1 > 0 && fullText)
+        if (isAnswer && Input.GetKeyDown(KeyCode.Space) && fullText)
         {
             if (!didDialogueStart)
             {
@@ -140,7 +144,7 @@ public class DialogueSystem : MonoBehaviour, ISerializationCallbackReceiver
             dialogueText.gameObject.SetActive(true);
         }
 
-        StartCoroutine(TypeText(textLines.Dequeue(), () => { if (nextDialogue != null) nextDialogue.SetActive(true); fullText = true; }));
+        StartCoroutine(TypeText(textLines.Dequeue(), () => { if (nextDialogue != null) nextDialogue.SetActive(true); }));
     }
 
     private async void NextDialogueLine()
@@ -153,11 +157,17 @@ public class DialogueSystem : MonoBehaviour, ISerializationCallbackReceiver
             StopAllCoroutines();
             await StartCoroutine(TypeText(textLines.Dequeue(), () => { if (nextDialogue != null) nextDialogue.SetActive(true); fullText = true; }));
 
-            Debug.Log("Inicia seleccion de producto");
-           /* dialogueText.text = string.Empty;
+            /*dialogueText.text = string.Empty;
             dialogueText.gameObject.SetActive(false);
 
-            optionPanel.SetActive(true);*/
+            optionPanel.SetActive(true);
+
+            for (int i = 0; i < buttons.transform.childCount; i++)
+            {
+                Transform option = buttons.transform.GetChild(i);
+                option.GetComponent<UIHelper>().type = NPCS[npcName].GetComponent<ItemAttributes>().Items[option.gameObject.name].Type;
+                option.GetComponent<UIHelper>().Text.GetComponent<Text>().text = NPCS[npcName].GetComponent<ItemAttributes>().Items[option.gameObject.name].ItemName;
+            }*/
 
             isAnswer = true;
             trigger = didDialogueStart = false;
@@ -205,6 +215,13 @@ public class DialogueSystem : MonoBehaviour, ISerializationCallbackReceiver
     {
         if (collision.gameObject.CompareTag("NPC"))
         {
+            if (!enter)
+            {
+                enter = true;
+                dialogues = collision.gameObject.GetComponent<Dialogues>()._Dialogues;
+                Answers = collision.gameObject.GetComponent<Dialogues>().Dict;
+                npcName = collision.gameObject.name;
+            }
             isInRange = true;
         }
     }
@@ -213,20 +230,28 @@ public class DialogueSystem : MonoBehaviour, ISerializationCallbackReceiver
     {
         if (collision.gameObject.CompareTag("NPC"))
         {
+            if (!exit)
+            {
+                exit = true;
+                dialogues = new Dialogue();
+                Answers = new Dictionary<AnswerType, List<string>>();
+                npcName = string.Empty;
+            }
             isInRange = false;
         }
     }
 
     public void OnAfterDeserialize()
     {
-        Answers = new Dictionary<AnswerType, List<string>>();
+        NPCS = new Dictionary<string, GameObject>();
+        int index = 1;
 
-        foreach (Answer item in answers)
+        foreach (GameObject item in npcList)
         {
-            Answers.Add(item.Type, item.TextLines);
+            NPCS.Add($"NPC{index}", item);
+            index++;
         }
     }
-
     public void OnBeforeSerialize()
     { }
 
