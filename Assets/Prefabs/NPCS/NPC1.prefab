@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 7306849286907467444}
   - component: {fileID: 6051373211233874716}
   - component: {fileID: 7482512265909558454}
+  - component: {fileID: 7948469120941137345}
+  - component: {fileID: 7136000926574483312}
   m_Layer: 0
   m_Name: NPC1
   m_TagString: NPC
@@ -150,3 +152,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9ca66d9ea51eb04483f6121e10a9d20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+--- !u!114 &7948469120941137345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6687574117471729557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84bcfc8ee2179f84e9b30e3b2c29966b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Dialogues
+  dialogues:
+    lines:
+    - triggerEvent: 0
+      textLine: "Chica Misteriosa: Buenas noches. \xBFQu\xE9 puedo hacer por Usted?"
+    - triggerEvent: 0
+      textLine: "Buenas Noches, Me gustar\xEDa ofrecerte algo"
+    - triggerEvent: 1
+      textLine: "Chica Misteriosa: Mmm... Est\xE1 bien, Dime."
+  answers:
+  - type: 1
+    textLines:
+    - "Chica Misteriosa: \xA1Muchas Gracias! Justo lo que necesitaba. "
+    - 'Chica Misteriosa: Ten cuidado, creo que no tienes permitido hacer esto. '
+  - type: 2
+    textLines:
+    - "\xA1No puedes hacer esto!"
+    - "\xA1Guardiaaaa!"
+--- !u!114 &7136000926574483312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6687574117471729557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c337d6b5f16ccf94289350a3a8d0d6a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ItemAttributes
+  itemList:
+  - type: 1
+    itemName: Labial Rojo
+  - type: 2
+    itemName: Perfume
+  - type: 2
+    itemName: Crema
