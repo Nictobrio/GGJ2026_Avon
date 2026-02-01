@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 7056723380000652792}
   - component: {fileID: 4326316026107091452}
   - component: {fileID: 1688330376437089952}
+  - component: {fileID: 1804179135634053047}
+  - component: {fileID: 3516375565766440832}
   m_Layer: 0
   m_Name: NPC2
   m_TagString: NPC
@@ -150,3 +152,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9ca66d9ea51eb04483f6121e10a9d20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+--- !u!114 &1804179135634053047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5453255471598988640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c337d6b5f16ccf94289350a3a8d0d6a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ItemAttributes
+  itemList:
+  - type: 2
+    itemName: Delineador
+  - type: 1
+    itemName: "M\xE1scara de pesta\xF1as"
+  - type: 2
+    itemName: Desodorante
+--- !u!114 &3516375565766440832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5453255471598988640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84bcfc8ee2179f84e9b30e3b2c29966b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Dialogues
+  dialogues:
+    lines:
+    - triggerEvent: 0
+      textLine: "Chico Misterioso: \xBFQu\xE9 quieres?... "
+    - triggerEvent: 0
+      textLine: "Disculpe, quer\xEDa ofrecerle algo"
+    - triggerEvent: 0
+      textLine: "Chico Misterioso: ... No conf\xEDo en t\xED"
+    - triggerEvent: 1
+      textLine: "Chico Misterioso: Si no me gusta llamar\xE9 al guardia "
+  answers:
+  - type: 1
+    textLines:
+    - "Ok, Te salvar\xE1s por ahora"
+  - type: 2
+    textLines:
+    - "\xA1Esta persona est\xE1 incumpliendo las reglas!"
+    - "\xA1Guardiaaaa!"

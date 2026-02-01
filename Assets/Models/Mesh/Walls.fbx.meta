@@ -10,7 +10,7 @@ ModelImporter:
       name: AtlasMaterial
     second: {fileID: 2100000, guid: 7e8ba8e13d9de9e4d9f1889328e18cfc, type: 2}
   materials:
-    materialImportMode: 2
+    materialImportMode: 0
     materialName: 0
     materialSearch: 1
     materialLocation: 1
