@@ -5,6 +5,7 @@ using System.Linq;
 using UnityAsync;
 using System;
 using System.Collections;
+using System.Runtime.CompilerServices;
 
 public class DialogueSystem : MonoBehaviour, ISerializationCallbackReceiver
 {
@@ -51,19 +52,12 @@ public class DialogueSystem : MonoBehaviour, ISerializationCallbackReceiver
     // Update is called once per frame
     void Update()
     {
-        /*if (isInRange && Input.GetButtonDown())
-        {
-            if (!didDialogueStart)
-            {
-                StartDialogue(); 
-            }
-            else if (fullText)
-            {
-                NextDialogueLine();
-            }
-        }*/
+        float fire1 = Input.GetAxis("Fire1");
 
-        if (Input.GetKeyDown(KeyCode.Space ) && !isAnswer)
+        Debug.Log(fire1);
+        Debug.Log(isInRange);
+
+        if ( isInRange && fire1 > 0 && !isAnswer)// Agregar is in range 
         {
             if (!didDialogueStart)
             {
@@ -81,9 +75,16 @@ public class DialogueSystem : MonoBehaviour, ISerializationCallbackReceiver
             StartAnswer();
         }
 
-        if (isAnswer && Input.GetKeyDown(KeyCode.Space) && fullText)
+        if (isAnswer && fire1 > 0 && fullText)
         {
-            NextDialogueLine();
+            if (!didDialogueStart)
+            {
+                StartAnswer();
+            }
+            else if (fullText)
+            {
+                NextDialogueLine();
+            }
         }
     }
 
@@ -139,13 +140,13 @@ public class DialogueSystem : MonoBehaviour, ISerializationCallbackReceiver
         if (trigger)
         {
             StopAllCoroutines();
-            await StartCoroutine(TypeText(textLines.Dequeue(), () => { if (nextDialogue != null) nextDialogue.SetActive(true); }));
+            await StartCoroutine(TypeText(textLines.Dequeue(), () => { if (nextDialogue != null) nextDialogue.SetActive(true); fullText = true; }));
 
             Debug.Log("Inicia seleccion de producto");
-            dialogueText.text = string.Empty;
+           /* dialogueText.text = string.Empty;
             dialogueText.gameObject.SetActive(false);
 
-            optionPanel.SetActive(true);
+            optionPanel.SetActive(true);*/
 
             isAnswer = true;
             trigger = didDialogueStart = false;
@@ -158,6 +159,8 @@ public class DialogueSystem : MonoBehaviour, ISerializationCallbackReceiver
             await new UnityAsync.WaitForSeconds(closeBoxClipDuration);
             dialogueText.gameObject.SetActive(false);
             dialogueBox.SetActive(false);
+            isAnswer = false;
+            trigger = didDialogueStart = false;
             return;
         }
 
@@ -181,7 +184,7 @@ public class DialogueSystem : MonoBehaviour, ISerializationCallbackReceiver
         Done();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.CompareTag("NPC"))
         {
@@ -189,7 +192,7 @@ public class DialogueSystem : MonoBehaviour, ISerializationCallbackReceiver
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerExit(Collider collision)
     {
         if (collision.gameObject.CompareTag("NPC"))
         {
