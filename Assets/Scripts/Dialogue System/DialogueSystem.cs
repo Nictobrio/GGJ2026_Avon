@@ -11,7 +11,7 @@ using UnityEngine.InputSystem.Controls;
 
 public class DialogueSystem : MonoBehaviour, ISerializationCallbackReceiver
 {
-    private bool isInRange, didDialogueStart, fullText, trigger, isAnswer, enter, exit;
+    private bool isInRange, didDialogueStart, fullText, isAnswer, enter, exit;
 
     public bool optionSelected;
 
@@ -20,6 +20,9 @@ public class DialogueSystem : MonoBehaviour, ISerializationCallbackReceiver
     [SerializeField] Dictionary<string, GameObject> npcs;
 
     [SerializeField] List<GameObject> npcList;
+
+    private Dictionary<int, bool> trigger = new Dictionary<int, bool>();
+    int index = 0;
 
     public Dictionary<string, GameObject> NPCS { get => npcs; set => npcs = value; }
 
@@ -91,7 +94,7 @@ public class DialogueSystem : MonoBehaviour, ISerializationCallbackReceiver
             StartAnswer();
         }
 
-        if (isAnswer && Input.GetKeyDown(KeyCode.Space) && fullText)
+        if (isAnswer && Input.GetKeyDown(KeyCode.Space))
         {
             if (!didDialogueStart)
             {
@@ -114,9 +117,11 @@ public class DialogueSystem : MonoBehaviour, ISerializationCallbackReceiver
             textLines.Enqueue(item.TextLine);
             if (item.TriggerEvent)
             {
-                trigger = item.TriggerEvent;
+                trigger.Add(index, item.TriggerEvent);
             }
+            index++;
         }
+        index = 0;
 
         if (!dialogueBox.activeSelf)
         {
@@ -145,7 +150,7 @@ public class DialogueSystem : MonoBehaviour, ISerializationCallbackReceiver
             dialogueText.gameObject.SetActive(true);
         }
 
-        StartCoroutine(TypeText(textLines.Dequeue(), () => { if (nextDialogue != null) nextDialogue.SetActive(true); }));
+        StartCoroutine(TypeText(textLines.Dequeue(), () => { if (nextDialogue != null) nextDialogue.SetActive(true); fullText = true; }));
     }
 
     private async void NextDialogueLine()
@@ -153,10 +158,10 @@ public class DialogueSystem : MonoBehaviour, ISerializationCallbackReceiver
         if (nextDialogue.activeSelf && nextDialogue != null) nextDialogue.SetActive(false);
         if (fullText) fullText = false;
 
-        if (trigger)
+        if (trigger.ContainsKey(index))
         {
             StopAllCoroutines();
-            await StartCoroutine(TypeText(textLines.Dequeue(), () => { if (nextDialogue != null) nextDialogue.SetActive(true); fullText = true; }));
+            await StartCoroutine(TypeText(textLines.Dequeue(), () => { if (nextDialogue != null) nextDialogue.SetActive(true); }));
 
             /*dialogueText.text = string.Empty;
             dialogueText.gameObject.SetActive(false);
@@ -171,7 +176,9 @@ public class DialogueSystem : MonoBehaviour, ISerializationCallbackReceiver
             }*/
 
             isAnswer = true;
-            trigger = didDialogueStart = false;
+            didDialogueStart = false;
+            trigger = new Dictionary<int, bool>();
+            index = 0;
         }
         else if (textLines.Count == 0 && isAnswer)
         {
@@ -182,20 +189,25 @@ public class DialogueSystem : MonoBehaviour, ISerializationCallbackReceiver
             dialogueText.gameObject.SetActive(false);
             dialogueBox.SetActive(false);
             isAnswer = false;
-            trigger = didDialogueStart = false;
-            
-            
+            trigger = new Dictionary<int, bool>();
+            didDialogueStart = false;
+
+
             //Nehuen
             controller.dialogueStart = false;
             return;
-
-            
         }
+        else
+        {
+            await StartCoroutine(TypeText(textLines.Dequeue(), () => { if (nextDialogue != null) nextDialogue.SetActive(true); fullText = true; }));
+        }
+
 
     }
     
     private IEnumerator TypeText(string line, Action Done)
     {
+        index++;
         dialogueText.text = string.Empty;
 
         char[] textToShow = line.ToCharArray();
@@ -222,6 +234,7 @@ public class DialogueSystem : MonoBehaviour, ISerializationCallbackReceiver
                 dialogues = collision.gameObject.GetComponent<Dialogues>()._Dialogues;
                 Answers = collision.gameObject.GetComponent<Dialogues>().Dict;
                 npcName = collision.gameObject.name;
+                exit = false;
             }
             isInRange = true;
         }
@@ -237,6 +250,7 @@ public class DialogueSystem : MonoBehaviour, ISerializationCallbackReceiver
                 dialogues = new Dialogue();
                 Answers = new Dictionary<AnswerType, List<string>>();
                 npcName = string.Empty;
+                enter = false;
             }
             isInRange = false;
         }
