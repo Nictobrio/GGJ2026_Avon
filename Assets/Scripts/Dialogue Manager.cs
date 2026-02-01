@@ -57,7 +57,7 @@ public class DialogueManager : MonoBehaviour
     public async void StartDialogue(Dialogue dialogue)
     {
         dialogues.Clear();
-        if (!dialogueState.Equals(DialogueStates.Init)) DialogueState = DialogueStates.Init;
+        //if (!dialogueState.Equals(DialogueStates.Init)) DialogueState = DialogueStates.Init;
 
         foreach (var item in dialogue.Lines)
         {
@@ -77,14 +77,14 @@ public class DialogueManager : MonoBehaviour
     {
         if (nextDialogue.activeSelf && nextDialogue != null) nextDialogue.SetActive(false);
 
-        if (dialogues.Count == 0)
+        /*if (dialogues.Count == 0)
         {
             StopAllCoroutines();
             if (!DialogueState.Equals(DialogueStates.End)) DialogueState = DialogueStates.End;
             dialogueBox.GetComponentInChildren<Text>().text = string.Empty;
             dialogueBox.GetComponent<Animator>().SetTrigger(GameConstants.CLOSE_BOX);
             return;
-        }
+        }*/
         StopAllCoroutines();
         StartCoroutine(TypeText(false, dialogues.Dequeue(), () => { if (nextDialogue != null) nextDialogue.SetActive(true); }));
 

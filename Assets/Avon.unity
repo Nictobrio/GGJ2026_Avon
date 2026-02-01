@@ -315,7 +315,7 @@ PrefabInstance:
     - target: {fileID: 429206255895044779, guid: f1528b6680bfc04479649ebfc3477890, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: afabe851abba495478d63c89b3f54afd, type: 2}
+      objectReference: {fileID: 9100000, guid: 36864b388cd1fc048b0ee6bb2f045485, type: 2}
     - target: {fileID: 429206255941249332, guid: f1528b6680bfc04479649ebfc3477890, type: 3}
       propertyPath: m_SizeDelta.x
       value: -114.721
@@ -334,7 +334,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 429206255941249333, guid: f1528b6680bfc04479649ebfc3477890, type: 3}
       propertyPath: m_Text
-      value: Lorem Ipsum
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 429206255941249333, guid: f1528b6680bfc04479649ebfc3477890, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 429206255941249333, guid: f1528b6680bfc04479649ebfc3477890, type: 3}
       propertyPath: m_FontData.m_Font
@@ -454,7 +458,13 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 429206256181925969, guid: f1528b6680bfc04479649ebfc3477890, type: 3}
       insertIndex: -1
       addedObject: {fileID: 326201223}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 429206255989958098, guid: f1528b6680bfc04479649ebfc3477890, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 697217837}
+    - targetCorrespondingSourceObject: {fileID: 429206255989958098, guid: f1528b6680bfc04479649ebfc3477890, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 697217845}
   m_SourcePrefab: {fileID: 100100000, guid: f1528b6680bfc04479649ebfc3477890, type: 3}
 --- !u!1 &697217833 stripped
 GameObject:
@@ -471,6 +481,38 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 429206256181925969, guid: f1528b6680bfc04479649ebfc3477890, type: 3}
   m_PrefabInstance: {fileID: 697217832}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &697217836 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 429206255989958098, guid: f1528b6680bfc04479649ebfc3477890, type: 3}
+  m_PrefabInstance: {fileID: 697217832}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &697217837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 697217836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4ed568248c11264a8ea3d417038829c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueTrigger
+  dialogues: {fileID: 11400000, guid: d96f600ca00f7bf459417571bfc18819, type: 2}
+--- !u!114 &697217845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 697217836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46fcb1e54508208408fd763460c3eabe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueControl
+  player: {fileID: 0}
+  NPC: {fileID: 0}
 --- !u!1001 &726116904
 PrefabInstance:
   m_ObjectHideFlags: 0

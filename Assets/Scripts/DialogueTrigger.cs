@@ -1,29 +1,23 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityAsync;
 
 public class DialogueTrigger : MonoBehaviour
 {
-    [SerializeField] private List<Dialogue> dialogues;
+    [SerializeField] private DialogueDatabase dialogues;
 
-    private Transform target;
-
-    public void TriggerDialogue(string lastStage)
+    void Start()
     {
-        foreach (var dialogue in dialogues)
-        {
-            if (dialogue.Step.Equals(lastStage))
-            {
-                DialogueManager.instance.StartDialogue(dialogue);
-                break;
-            }
-        }
+        TriggerDialogue(DialogueStep.Greeting);   
+    }
+
+    public void TriggerDialogue(DialogueStep step)
+    {
+        DialogueManager.instance.StartDialogue(dialogues.DialogueDict[step]);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player")) target = collision.transform;
+
     }
 
     private void OnTriggerExit2D(Collider2D collision)

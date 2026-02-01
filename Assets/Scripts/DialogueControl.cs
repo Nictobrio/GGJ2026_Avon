@@ -10,6 +10,10 @@ public class DialogueControl : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject NPC;
 
+    private new Collider2D collider = null;
+
+    private bool inRange;
+
     private void Awake()
     {
         if (instance == null)
@@ -36,5 +40,17 @@ public class DialogueControl : MonoBehaviour
         {
             DialogueManager.instance.SetNextDialogue();
         }
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        inRange = true;
+        collider = collision;
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        inRange = false;
+        collider = null;
     }
 }
