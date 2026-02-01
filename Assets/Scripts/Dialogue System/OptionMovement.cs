@@ -29,7 +29,7 @@ public class OptionMovement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            GetComponent<DialogueSystem>().type = option.gameObject.GetComponent<ItemAttributes>().Type;
+            GetComponent<DialogueSystem>().type = option.gameObject.GetComponent<UIHelper>().type;
             GetComponent<DialogueSystem>().optionSelected = true;
         }
     }

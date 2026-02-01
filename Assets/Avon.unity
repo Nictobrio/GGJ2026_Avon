@@ -435,6 +435,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 660114158185681408, guid: f383e2172f25c494aa5461e6fb0449e0, type: 3}
+      propertyPath: m_Name
+      value: Option1
+      objectReference: {fileID: 0}
     - target: {fileID: 1402299167013145956, guid: f383e2172f25c494aa5461e6fb0449e0, type: 3}
       propertyPath: m_Camera
       value: 
@@ -522,6 +526,14 @@ PrefabInstance:
     - target: {fileID: 3749807821092368089, guid: f383e2172f25c494aa5461e6fb0449e0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5692702762391568841, guid: f383e2172f25c494aa5461e6fb0449e0, type: 3}
+      propertyPath: m_Name
+      value: Option2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7700250951861759172, guid: f383e2172f25c494aa5461e6fb0449e0, type: 3}
+      propertyPath: m_Name
+      value: Option0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

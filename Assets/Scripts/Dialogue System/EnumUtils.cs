@@ -9,6 +9,7 @@ public enum DialogueStates
 
 public enum AnswerType
 {
+    Default,
     Good,
     Bad
 }
