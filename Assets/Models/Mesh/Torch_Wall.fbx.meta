@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9d1ba2e6730b1d34b85f4cd4b97a207e
+guid: dff9cc956374c734db7dd07ef3bdb9a9
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -7,8 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: M_Floor
-    second: {fileID: 2100000, guid: fe3f0642754c5864bba078083fcf0f17, type: 2}
+      name: AtlasMaterial
+    second: {fileID: 2100000, guid: adf5626a37fe2c74394a877ffa632d35, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

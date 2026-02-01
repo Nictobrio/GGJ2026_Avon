@@ -20,5 +20,9 @@ public class ChangeMaskButton : CustomButton {
         MaskIsBroken = true;
         HideButton();
     }
+    public void RestoreMask() {
+        MaskIsBroken = false;
+        ShowButton();
+    }
 
 }
