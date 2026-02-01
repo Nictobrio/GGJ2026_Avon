@@ -3665,7 +3665,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8804990989932624945}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: ShowCredits
+        m_MethodName: HideCreditsAndReturnToTitleScreen
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4473,7 +4473,6 @@ MonoBehaviour:
   - {fileID: 6010234450987890999}
   _settingsMenu: {fileID: 3812340594860273674}
   _titleScreenMenu: {fileID: 2098648884079389213}
-  _titleScreenCameraSystem: {fileID: 0}
   _gameplayUI: {fileID: 5914686962799376548}
   _creditsMenu: {fileID: 6160076531981335095}
   _victoryBackgroundImage: {fileID: 1319227940445122366}
