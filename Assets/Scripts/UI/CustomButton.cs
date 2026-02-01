@@ -15,11 +15,11 @@ public class CustomButton : Button {
     }
 
     protected virtual void PlayUIHighlightSound() {
-        //AudioManager.Instance.PlayHighlightButtonSFX();
+        AudioManager.Instance.PlayHighlightButtonSFX();
     }
 
     protected virtual void PlayUISubmitSound() {
-        //AudioManager.Instance.PlayPressButtonSFX();
+        AudioManager.Instance.PlayPressButtonSFX();
     }
 
 }
