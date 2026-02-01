@@ -7,12 +7,10 @@ public enum DialogueStates
     End
 }
 
-public enum DialogueStep
+public enum AnswerType
 {
-    Greeting,
-    First,
-    GoodAnswer,
-    BadAnswer
+    Good,
+    Bad
 }
 
 #endregion
