@@ -45,7 +45,7 @@ public class DialogueSystem : MonoBehaviour, ISerializationCallbackReceiver
 
     //Nehuen
 
-    public CharacterMovement controller;
+    CharacterMovement controller;
 
     private void Awake()
     {
@@ -69,6 +69,7 @@ public class DialogueSystem : MonoBehaviour, ISerializationCallbackReceiver
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(isInRange);
         if (isInRange && Input.GetKeyDown(KeyCode.Space) && !isAnswer)
         {
             if (!didDialogueStart)

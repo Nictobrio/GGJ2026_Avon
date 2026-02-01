@@ -57,7 +57,18 @@ public class CharacterMovement : MonoBehaviour
        
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+       if  (other.gameObject.CompareTag("Guard"))
+        {
+            perdiste();
+        }
+    }
 
+    void perdiste()
+    {
+        Debug.Log("Perdiste");
+    }
 }
    
 
