@@ -1,6 +1,6 @@
-using NUnit.Framework;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour {
@@ -8,8 +8,9 @@ public class UIManager : MonoBehaviour {
     [SerializeField] private ChangeMaskButton[] _changeMaskButtons;
     [SerializeField] private GameObject _settingsMenu;
     [SerializeField] private GameObject _titleScreenMenu;
-    [SerializeField] private GameObject _titleScreenCameraSystem;
+    //[SerializeField] private GameObject _titleScreenCameraSystem;
     [SerializeField] private GameObject _gameplayUI;
+    [SerializeField] private GameObject _creditsMenu;
     [Header("Victory")]
     [SerializeField] private Image _victoryBackgroundImage;
     [SerializeField] private GameObject _victoryMenu;
@@ -27,17 +28,17 @@ public class UIManager : MonoBehaviour {
             Destroy(gameObject); //If there is already an instance of the PersistentSingleton, destroys the new one on Awake
         } else {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
     }
     #endregion
 
     public void StartGame() {   //Called from a button
         _titleScreenMenu.SetActive(false);
-        if (_titleScreenCameraSystem != null)
-            _titleScreenCameraSystem.SetActive(false);
-
+        //if (_titleScreenCameraSystem != null)
+        //    _titleScreenCameraSystem.SetActive(false);
         RestartGameplayUI();
-        //TO DO     //Actually start the game
+        SceneManager.LoadScene("Gameplay");     //TO DO
     }
 
     private void RestartGameplayUI() {
@@ -134,6 +135,14 @@ public class UIManager : MonoBehaviour {
     }
     public void CloseSettingsMenu() {    //Called from a button
         _settingsMenu.SetActive(false);
+    }
+
+    public void ShowCredits() {    //Called from a button
+        _creditsMenu.SetActive(true);
+    }
+    public void HideCreditsAndReturnToTitleScreen() {    //Called from a button
+        _creditsMenu.SetActive(false);
+        SceneManager.LoadScene("MainMenu");     //TO DO
     }
 
 }
