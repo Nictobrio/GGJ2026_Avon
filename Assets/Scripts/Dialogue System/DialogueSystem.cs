@@ -34,6 +34,10 @@ public class DialogueSystem : MonoBehaviour, ISerializationCallbackReceiver
 
     [SerializeField] Dictionary<AnswerType, List<string>> Answers;
 
+    //Nehuen
+
+    public CharacterMovement controller;
+
     private void Awake()
     {
         textLines = new Queue<string>();
@@ -47,6 +51,10 @@ public class DialogueSystem : MonoBehaviour, ISerializationCallbackReceiver
             closeBoxClipDuration =
                 DialogueBoxAnimator.runtimeAnimatorController.animationClips.Where(x => x.name.Equals(GameConstants.CLOSE_BOX)).FirstOrDefault().length;
         }
+
+        //Nehuen
+        controller = GetComponent<CharacterMovement>();
+
     }
 
     // Update is called once per frame
@@ -61,7 +69,10 @@ public class DialogueSystem : MonoBehaviour, ISerializationCallbackReceiver
         {
             if (!didDialogueStart)
             {
-                StartDialogue(); 
+                StartDialogue();
+
+                //Nehuen
+                controller.dialogueStart = true;
             }
             else if (fullText)
             {
@@ -161,7 +172,13 @@ public class DialogueSystem : MonoBehaviour, ISerializationCallbackReceiver
             dialogueBox.SetActive(false);
             isAnswer = false;
             trigger = didDialogueStart = false;
+            
+            
+            //Nehuen
+            controller.dialogueStart = false;
             return;
+
+            
         }
 
     }
