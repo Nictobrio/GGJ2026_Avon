@@ -3,6 +3,7 @@ using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem.XR;
+using UnityEngine.SceneManagement;
 
 public class CharacterMovement : MonoBehaviour
 {
@@ -20,7 +21,7 @@ public class CharacterMovement : MonoBehaviour
     void Start()
     {
        controller = GetComponent<CharacterController>();
-       Cursor.lockState = CursorLockMode.Locked;
+       //Cursor.lockState = CursorLockMode.Locked;
        
     }
 
@@ -67,7 +68,7 @@ public class CharacterMovement : MonoBehaviour
 
     void perdiste()
     {
-        Debug.Log("Perdiste");
+        SceneManager.LoadScene(2);
     }
 }
    

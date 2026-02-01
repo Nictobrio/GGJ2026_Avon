@@ -162,8 +162,8 @@ public class DialogueSystem : MonoBehaviour, ISerializationCallbackReceiver
         {
             StopAllCoroutines();
             await StartCoroutine(TypeText(textLines.Dequeue(), () => { if (nextDialogue != null) nextDialogue.SetActive(true); }));
-
-            /*dialogueText.text = string.Empty;
+            if (nextDialogue.activeSelf && nextDialogue != null) nextDialogue.SetActive(false);
+            dialogueText.text = string.Empty;
             dialogueText.gameObject.SetActive(false);
 
             optionPanel.SetActive(true);
@@ -173,7 +173,7 @@ public class DialogueSystem : MonoBehaviour, ISerializationCallbackReceiver
                 Transform option = buttons.transform.GetChild(i);
                 option.GetComponent<UIHelper>().type = NPCS[npcName].GetComponent<ItemAttributes>().Items[option.gameObject.name].Type;
                 option.GetComponent<UIHelper>().Text.GetComponent<Text>().text = NPCS[npcName].GetComponent<ItemAttributes>().Items[option.gameObject.name].ItemName;
-            }*/
+            }
 
             isAnswer = true;
             didDialogueStart = false;
