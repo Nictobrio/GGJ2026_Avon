@@ -27,11 +27,11 @@ public class AudioManager : MonoBehaviour {
     #endregion
 
     public void PlayHighlightButtonSFX() {
-        //_highlightButtonSFX.Play();           //TO DO       //Uncomment when the SFX is added
+        _highlightButtonSFX.Play();           //TO DO       //Uncomment when the SFX is added
     }
 
     public void PlayPressButtonSFX() {
-        //_pressButtonSFX.Play();               //TO DO       //Uncomment when the SFX is added
+        _pressButtonSFX.Play();               //TO DO       //Uncomment when the SFX is added
     }
 
     public void PlayMusic(AudioClip clip) {
